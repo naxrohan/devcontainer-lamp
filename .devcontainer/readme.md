@@ -1,0 +1,5 @@
+
+
+# todo: 
+adminer
+node/npm

@@ -1,0 +1,44 @@
+{
+	"name": "App Backend",
+	"dockerComposeFile": ["../.docker/docker-compose.yml"],
+	"workspaceMount": "source=${localWorkspaceFolder},target=/usr/local/apache2/htdocs/,type=bind,consistency=cached",
+	"workspaceFolder": "/usr/local/apache2/htdocs/",
+	"service": "php",
+	// "postCreateCommand": "/home/developer/scripts/postCreate.sh",
+	// "postStartCommand": "/home/developer/scripts/postStart.sh",
+	"forwardPorts": [9000],
+	"customizations": {
+	  "vscode": {
+		"settings": {
+		  "terminal.integrated.defaultProfile.linux": "bash",
+		  "terminal.integrated.profiles.linux": {
+			"bash": {
+			  "path": "/bin/bash"
+			}
+		  },
+		  "files.autoSave": "onFocusChange",
+		  "files.defaultLanguage": "markdown",
+		  "files.encoding": "utf8",
+		  "prettier.endOfLine": "lf",
+		  "[python]": {
+			"editor.defaultFormatter": "ms-python.autopep8"
+		  },
+		  "php.validate.enable": false,
+		  "php.suggest.basic": false,
+		  "editor.gotoLocation.multipleDefinitions": "goto",
+		  "shellformat.path": "/home/developer/.local/bin/shfmt",
+		},
+		"extensions": [
+		  "xyz.local-history",
+		  "foxundermoon.shell-format",
+		  "calebporzio.better-phpunit",
+		  "editorconfig.editorconfig",
+		  "ahmadalli.vscode-nginx-conf",
+		  "ms-python.python",
+		  "ms-python.autopep8",
+		  "esbenp.prettier-vscode"
+		]
+	  }
+	}
+  }
+  
