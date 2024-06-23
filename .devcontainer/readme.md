@@ -1,5 +1,4 @@
 
 
 # todo: 
-adminer
 node/npm

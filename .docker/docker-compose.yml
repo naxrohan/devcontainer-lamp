@@ -7,16 +7,16 @@ services:
       context: './php/'
       args:
        PHP_VERSION: 8.2-fpm
-    container_name: "app_php"
+    container_name: "app_${PROJECT_NAME}_php"
     networks:
       - backend
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
-      # DB_HOST: $DB_HOST
-      # DB_USER: $DB_USER
-      # DB_PASSWORD: $DB_PASSWORD
-      # DB_NAME: $DB_NAME
-      # DB_DRIVER: $DB_DRIVER
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DB_DRIVER: $DB_DRIVER
     volumes:
         - ../:/usr/local/apache2/htdocs/
         - ./php/php.ini:/usr/local/etc/php/php.ini
@@ -25,12 +25,11 @@ services:
       context: './apache/'
       args:
        APACHE_VERSION: latest
-    container_name: "app_httpd"
+    container_name: "app_${PROJECT_NAME}_httpd"
     depends_on:
         - php
-        # - mysqldb
+        - mysqldb
     networks:
-      # - frontend
       - backend
     ports:
       - '443:443'
@@ -41,26 +40,22 @@ services:
 
   mysqldb:
     image: mysql:8.0.32
-    container_name: "app_mysqldb"
+    container_name: "app_${PROJECT_NAME}_mysqldb"
     stop_grace_period: 30s
     networks:
       - backend
-      # - frontend
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_DATABASE: 'root'
-      MYSQL_USER: 'rohan'
-      MYSQL_PASSWORD: 'root'
-      # DB_HOST: mysqldb
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
       PMA_HOST: mysqldb
     external_links:
         - mysql_mysql_1:mysqldb
     volumes:
         - ./db/:/home/
         - ./db/datadir:/var/lib/mysql
-        # - ./db/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
 networks:
-  # frontend:
   backend:

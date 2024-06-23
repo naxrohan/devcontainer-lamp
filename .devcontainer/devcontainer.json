@@ -1,12 +1,16 @@
 {
-	"name": "App Backend",
-	"dockerComposeFile": ["../.docker/docker-compose.yml"],
+	"name": "Simple LAMP",
+	"dockerComposeFile": [ "../.docker/docker-compose.yml" ],
+	"service": "php",
+
 	"workspaceMount": "source=${localWorkspaceFolder},target=/usr/local/apache2/htdocs/,type=bind,consistency=cached",
 	"workspaceFolder": "/usr/local/apache2/htdocs/",
-	"service": "php",
-	// "postCreateCommand": "/home/developer/scripts/postCreate.sh",
-	// "postStartCommand": "/home/developer/scripts/postStart.sh",
+	
+	"postCreateCommand": "echo \"----->Creation completed\"",
+	"postStartCommand": "echo \"----->Creation started\"",
+	
 	"forwardPorts": [9000],
+	
 	"customizations": {
 	  "vscode": {
 		"settings": {
@@ -26,17 +30,14 @@
 		  "php.validate.enable": false,
 		  "php.suggest.basic": false,
 		  "editor.gotoLocation.multipleDefinitions": "goto",
-		  "shellformat.path": "/home/developer/.local/bin/shfmt",
+		  "shellformat.path": "/home/developer/.local/bin/shfmt"
 		},
 		"extensions": [
-		  "xyz.local-history",
-		  "foxundermoon.shell-format",
-		  "calebporzio.better-phpunit",
-		  "editorconfig.editorconfig",
-		  "ahmadalli.vscode-nginx-conf",
 		  "ms-python.python",
 		  "ms-python.autopep8",
-		  "esbenp.prettier-vscode"
+		  "esbenp.prettier-vscode",
+		  "xyz.local-history",
+		  "editorconfig.editorconfig"
 		]
 	  }
 	}
